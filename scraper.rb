@@ -61,8 +61,8 @@ def parse_zsnh(doc, institution)
 
     data = {
         "por_cislo"   => (tds[0].text.strip),
-        "supplier"    => (tds[1].text.strip),
-        "subject"     => (tds[2].text.strip),
+        "supplier"    => ((tds[1] || Dummy.new).text.strip),
+        "subject"     => ((tds[2] || Dummy.new).text.strip),
         "price"       => ((tds[3] || Dummy.new).text.strip),
         "institution" => institution}
     ScraperWiki.save_sqlite(unique_keys = [], data = data, table_name = 'zsnh')
