@@ -49,7 +49,7 @@ def parse_it(doc, table, institution)
           "institution"    => institution}
     end
 
-    ScraperWiki.save_sqlite(unique_keys = [], data = data, table_name = table)
+    ScraperWiki.save_sqlite(unique_keys = ["evid_cislo"], data = data, table_name = table)
   end
 end
 
@@ -65,7 +65,7 @@ def parse_zsnh(doc, institution)
         "subject"     => ((tds[2] || Dummy.new).text.strip),
         "price"       => ((tds[3] || Dummy.new).text.strip),
         "institution" => institution}
-    ScraperWiki.save_sqlite(unique_keys = [], data = data, table_name = 'zsnh')
+    ScraperWiki.save_sqlite(unique_keys = ["por_cislo"], data = data, table_name = 'zsnh')
   end
 end
 
@@ -84,7 +84,7 @@ def parse_elektr_aukcie(doc, institution)
         "price_after"  => ((tds[5] || Dummy.new).text.strip),
         "institution"  => institution
     }
-    ScraperWiki.save_sqlite(unique_keys = [], data = data, table_name = "elaukcie")
+    ScraperWiki.save_sqlite(unique_keys = ["por_cislo"], data = data, table_name = "elaukcie")
   end
 end
 
