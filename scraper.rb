@@ -35,7 +35,7 @@ def parse_it(doc, table, institution)
           "supplier"       => (tds[3].text.strip),
           "subject"        => ((tds[4].xpath('.//div[@class="faktury-predmet"]') || Dummy.new).text.strip),
           "contract"       => ((tds[4].xpath('.//div[@class="faktury-zmluva"]') || Dummy.new).text.strip),
-          "order"          => ((tds[4].xpath('.//div[@class="faktury-objednavka"]') || Dummy.new).text.strip),
+          "purchase"       => ((tds[4].xpath('.//div[@class="faktury-objednavka"]') || Dummy.new).text.strip),
           "price"          => ((tds[5] || Dummy.new).text.strip),
           "institution"    => institution}
     when /zmluvy/u then
