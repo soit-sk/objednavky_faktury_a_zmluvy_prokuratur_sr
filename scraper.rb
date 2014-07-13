@@ -1,5 +1,5 @@
-require 'scraperwiki'
 require 'rubygems'
+require 'scraperwiki'
 require 'nokogiri'
 require 'open-uri'
 
