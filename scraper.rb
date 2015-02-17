@@ -58,6 +58,7 @@ def parse_zsnh(doc, institution)
     next if tr.xpath('.//td[@class="pozadie-okrove1"]').children.size != 0
     next if tr.xpath('.//td/h3').children.size != 0
     tds = tr.xpath('.//td')
+    next if tds.size == 0
 
     data = {
         "por_cislo"   => (tds[0].text.strip),
