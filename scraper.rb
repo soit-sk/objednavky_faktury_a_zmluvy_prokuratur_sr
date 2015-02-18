@@ -97,6 +97,10 @@ navig = doc.xpath('//ul[@class="navigacia"]/li/a')
 navig.each do |nav|
   institution = nav.text
 
+  if /str.nka .radu.*/u =~ institution
+    next
+  end
+
   html = open(SITE + nav['href'])
   doc = Nokogiri::HTML(html)
   doc.xpath('//li[@class="activ"]/ul/li/a').each do |lnk_node|
