@@ -91,7 +91,7 @@ end
 
 SITE = 'http://www.genpro.gov.sk'
 url = "http://www.genpro.gov.sk/objednavky-faktury-a-zmluvy-28dd.html"
-doc = Nokogiri::HTML(open(url))
+doc = Nokogiri::HTML(open(url, :read_timeout => 300))
 
 navig = doc.xpath('//ul[@class="navigacia"]/li/a')
 navig.each do |nav|
@@ -101,10 +101,10 @@ navig.each do |nav|
     next
   end
 
-  html = open(SITE + nav['href'])
+  html = open(SITE + nav['href'], :read_timeout => 300)
   doc = Nokogiri::HTML(html)
   doc.xpath('//li[@class="activ"]/ul/li/a').each do |lnk_node|
-    htm = open(SITE + lnk_node['href'])
+    htm = open(SITE + lnk_node['href'], :read_timeout => 300)
     doc  = Nokogiri::HTML(htm)
 
     case lnk_node
@@ -113,7 +113,7 @@ navig.each do |nav|
       divs.each do |div|
         months = div.xpath('.//a')
         months.each do |month|
-          doc = Nokogiri::HTML(open(SITE + lnk_node['href'] + month['href']))
+          doc = Nokogiri::HTML(open(SITE + lnk_node['href'] + month['href'], :read_timeout => 300))
           parse_it(doc, "objednavky", institution)
         end
       end
@@ -122,7 +122,7 @@ navig.each do |nav|
       divs.each do |div|
         months = div.xpath('.//a')
         months.each do |month|
-          doc = Nokogiri::HTML(open(SITE + lnk_node['href'] + month['href']))
+          doc = Nokogiri::HTML(open(SITE + lnk_node['href'] + month['href'], :read_timeout => 300))
           parse_it(doc, "faktury", institution)
         end
       end
@@ -131,7 +131,7 @@ navig.each do |nav|
       divs.each do |div|
         months = div.xpath('.//a')
         months.each do |month|
-          doc = Nokogiri::HTML(open(SITE + lnk_node['href'] + month['href']))
+          doc = Nokogiri::HTML(open(SITE + lnk_node['href'] + month['href'], :read_timeout => 300))
           parse_it(doc, "zmluvy", institution)
         end
       end
@@ -139,7 +139,7 @@ navig.each do |nav|
       parse_zsnh(doc, institution)
     when /elektronick\303\251 aukcie/u then
       doc.xpath('//div[@class="content"]/div/span/a').each do |a|
-        doc = Nokogiri::HTML(open(SITE + lnk_node['href'] + a['href']))
+        doc = Nokogiri::HTML(open(SITE + lnk_node['href'] + a['href'], :read_timeout => 300))
         parse_elektr_aukcie(doc, institution)
       end
     end
