@@ -89,8 +89,8 @@ def parse_elektr_aukcie(doc, institution)
   end
 end
 
-SITE = 'http://www.genpro.gov.sk'
-url = "http://www.genpro.gov.sk/objednavky-faktury-a-zmluvy-28dd.html"
+SITE = 'https://www.genpro.gov.sk'
+url = "https://www.genpro.gov.sk/objednavky-faktury-a-zmluvy-28dd.html"
 doc = Nokogiri::HTML(open(url, :read_timeout => 300))
 
 navig = doc.xpath('//ul[@class="navigacia"]/li/a')
